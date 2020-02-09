@@ -41,6 +41,8 @@ To send remote code to the player, just call the service `freebox_player.remote`
 code: "power"
 ```
 
+/!\ For multi number channel, like `23`, you need to call the service twice, one for each number (`2` && `3`)
+
 ## Button List
 
 * "red" // Bouton rouge
