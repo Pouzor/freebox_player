@@ -1,0 +1,6 @@
+remote:
+  description: Call remote code to teh Freebox Player
+  fields:
+    code:
+      description: Code Number
+      example: 'power'

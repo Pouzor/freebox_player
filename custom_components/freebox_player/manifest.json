@@ -1,0 +1,8 @@
+{
+    "domain": "freebox_player",
+    "name": "Freebox Player",
+    "documentation": "https://github.com/Pouzor/freebox_player",
+    "dependencies": [],
+    "codeowners": ["@Pouzor"],
+    "requirements": []
+  }
