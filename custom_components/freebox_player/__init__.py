@@ -4,9 +4,6 @@ https://github.com/Pouzor/freebox_player
 """
 
 import logging
-import json
-import hmac
-import hashlib
 import requests
 import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
