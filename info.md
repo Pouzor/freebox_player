@@ -32,7 +32,67 @@ Where `remote_code` is the free authorization code for remote and `host` the ip 
 
 Go to 
 * `Freebox main menu` >> `Parameters` >> `General Information` For old box
-* `Freebox main menu` >> `Réglage` >> `Systeme Information` For Delta 
+* `Freebox main menu` >> `Réglages` >> `Systeme Information` For Delta 
 
 ## How to use the remote
-Incomming... (only power on for now)
+
+To send remote code to the player, just call the service `freebox_player.remote` with teh code in parameter : 
+```yaml
+code: "power"
+```
+
+## Button List
+
+"red" // Bouton rouge
+"green" // Bouton vert
+"blue" // Bouton bleu
+"yellow" // Bouton jaune
+
+
+"power" // Bouton Power
+"list" // Affichage de la liste des chaines
+"tv" // Bouton tv
+
+"1" // Bouton 1
+"2" // Bouton 2
+"3" // Bouton 3
+"4" // Bouton 4
+"5" // Bouton 5
+"6" // Bouton 6
+"7" // Bouton 7
+"8" // Bouton 8
+"9" // Bouton 9
+
+"back" // Bouton jaune (retour)
+"0" // Bouton 0
+"swap" // Bouton swap
+
+"info" // Bouton info
+"epg" // Bouton epg (fct+)
+"mail" // Bouton mail
+"media" // Bouton media (fct+)
+"help" // Bouton help
+"options" // Bouton options (fct+)
+"pip" // Bouton pip
+
+"vol_inc" // Bouton volume +
+"vol_dec" // Bouton volume -
+
+"ok" // Bouton ok
+"up" // Bouton haut
+"right" // Bouton droite
+"down" // Bouton bas
+"left" // Bouton gauche
+
+"prgm_inc" //Bouton programme +
+"prgm_dec" // Bouton programme -
+
+"mute" // Bouton sourdine
+"home" // Bouton Free
+"rec" // Bouton Rec
+
+"bwd" // Bouton << retour arrière
+"prev" // Bouton |<< précédent
+"play" // Bouton Lecture / Pause
+"fwd" // Bouton >> avance rapide
+"next" // Bouton >>| suivant
