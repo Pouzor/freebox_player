@@ -12,7 +12,7 @@ This component is tested on Freebox Delta, but should work too on FreeBox Revolu
 * Even more incoming
 
 ## Still under developpment
-This conponent use the old remote API, but since short time, Free is developping new API unrelated to remote (control player to open URL ect...)
+This conponent use the old remote API, but since short time, Free is developping new API unrelated to remote (control player to open URL ect…)
 
 ## Configuration
 Once installed, the Freebox Player component needs to be configured in order to work.
@@ -36,7 +36,7 @@ Go to
 
 ## How to use the remote
 
-To send remote code to the player, just call the service `freebox_player.remote` with teh code in parameter : 
+To send remote code to the player, just call the service `freebox_player.remote` with the code in parameter: 
 ```yaml
 code: "power"
 ```
