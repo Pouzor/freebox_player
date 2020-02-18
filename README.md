@@ -41,7 +41,15 @@ To send remote code to the player, just call the service `freebox_player.remote`
 code: "power"
 ```
 
-/!\ For multi number channel, like `23`, you need to call the service twice, one for each number (`2` && `3`)
+### Mutiple code
+
+If you want to send multiple code like `123` for example, you need to split each code with a comma :
+```yaml
+code: "1,2,3"
+```
+
+Or you call multiple times the service for each number (`1` && `2` && `3`)
+
 
 ## Button List
 
