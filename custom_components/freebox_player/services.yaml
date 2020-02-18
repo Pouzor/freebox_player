@@ -1,5 +1,5 @@
 remote:
-  description: Call remote code to teh Freebox Player
+  description: Call remote code to the Freebox Player
   fields:
     code:
       description: Code Number
