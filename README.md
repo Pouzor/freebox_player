@@ -2,7 +2,9 @@
 
 Based on pure-python library, this custom component enables remote control on your Freebox Player devices.
 
-This component is tested on Freebox Delta, but should work too on FreeBox Revolution, mini and crystal (feedsback will be appreciated)
+This component is tested on Freebox Delta, but should work too on Freebox Revolution and Crystal (feedsback will be appreciated).
+
+It's doesn't works on Freebox mini 4K. This one doesn't have a remote code.
 
 ## Features
 * Supports On / Off 
