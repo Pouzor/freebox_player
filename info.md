@@ -12,7 +12,7 @@ This component is tested on Freebox Delta, but should work too on FreeBox Revolu
 * Even more incoming
 
 ## Still under developpment
-This conponent use the old remote API, but since short time, Free is developping new API unrelated to remote (control player to open URL ect...)
+This conponent use the old remote API, but since short time, Free is developping new API unrelated to remote (control player to open URL ect…)
 
 ## Configuration
 Once installed, the Freebox Player component needs to be configured in order to work.
@@ -36,12 +36,20 @@ Go to
 
 ## How to use the remote
 
-To send remote code to the player, just call the service `freebox_player.remote` with teh code in parameter : 
+To send remote code to the player, just call the service `freebox_player.remote` with the code in parameter: 
 ```yaml
 code: "power"
 ```
 
-/!\ For multi number channel, like `23`, you need to call the service twice, one for each number (`2` && `3`)
+### Mutiple code
+
+If you want to send multiple code like `123` for example, you need to split each code with a comma :
+```yaml
+code: "1,2,3"
+```
+
+Or you call multiple times the service for each number (`1` && `2` && `3`)
+
 
 ## Button List
 

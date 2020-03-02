@@ -49,8 +49,12 @@ async def async_setup_freebox_player(hass, config, host, port):
     async def async_freebox_player_remote(call):
         """Handle old player control (remote emulation)"""
 
-        code = call.data.get('code')
+        code_list = call.data.get('code')
 
-        requests.get(player_path+code, verify=False)
+        code_array = code.split(',')
+
+        """Handle multiple codes, separated by comma"""
+        for code in code_array:
+            requests.get(player_path+code, verify=False)
 
     hass.services.async_register(DOMAIN, "remote", async_freebox_player_remote)
