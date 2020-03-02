@@ -51,7 +51,7 @@ async def async_setup_freebox_player(hass, config, host, port):
 
         code_list = call.data.get('code')
 
-        code_array = code.split(',')
+        code_array = code_list.split(',')
 
         """Handle multiple codes, separated by comma"""
         for code in code_array:
