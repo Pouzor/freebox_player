@@ -55,6 +55,6 @@ async def async_setup_freebox_player(hass, config, host, port):
 
         """Handle multiple codes, separated by comma"""
         for code in code_array:
-            requests.get(player_path+code, verify=False)
+            await hass.async_add_executor_job(requests.get, player_path+code, 'verify=False')
 
     hass.services.async_register(DOMAIN, "remote", async_freebox_player_remote)
