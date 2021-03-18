@@ -1,10 +1,24 @@
 # Freebox Player Custom Component for Home Assistant
 
+[![](https://img.shields.io/github/release/Pouzor/freebox_player/all.svg?style=for-the-badge)](https://github.com/Pouzor/freebox_player)
+[![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg?style=for-the-badge)](https://github.com/hacs/integration)
+[![](https://img.shields.io/github/license/Pouzor/freebox_player?style=for-the-badge)](LICENSE)
+
 Based on pure-python library, this custom component enables remote control on your Freebox Player devices.
 
 This component is tested on Freebox Delta, but should work too on Freebox Revolution and Crystal (feedsback will be appreciated).
 
 It's doesn't works on Freebox mini 4K. This one doesn't have a remote code.
+
+
+## Installation
+
+### HACS Install
+
+1. Search for `Freebox Player` under `Integrations` in the HACS Store tab.
+2. **You will need to restart after installation for the component to start working.**
+3. Configure the integation (see Configuration section)
+
 
 ## Features
 * Supports On / Off 
