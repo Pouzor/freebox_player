@@ -4,5 +4,7 @@
     "documentation": "https://github.com/Pouzor/freebox_player",
     "dependencies": [],
     "codeowners": ["@Pouzor"],
-    "requirements": []
+    "requirements": [],
+    "version": "1.0.6",
+    "iot_class": "local_push"
   }
