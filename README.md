@@ -121,3 +121,15 @@ Or you call multiple times the service for each number (`1` && `2` && `3`)
 * "play" // Bouton Lecture / Pause
 * "fwd" // Bouton >> avance rapide
 * "next" // Bouton >>| suivant
+
+* "tv"
+* "replay"
+* "vod"
+* "whatson"
+* "records"
+* "media"
+* "youtube"
+* "radios"
+* "canalvod"
+* "pip"
+* "netflix"
