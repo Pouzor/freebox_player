@@ -31,9 +31,19 @@ It's doesn't works on Freebox mini 4K. This one doesn't have a remote code.
 This conponent use the old remote API, but since short time, Free is developping new API unrelated to remote (control player to open URL ect…)
 
 ## Configuration
-Once installed, the Freebox Player component needs to be configured in order to work.
 
-Edit `configuration.yaml` file and add the following:
+Configuration is done through the Home Assistant UI.
+
+1. Go to **Settings** → **Devices & Services** → **Add Integration**.
+2. Search for **Freebox Player**.
+3. Enter the **Host** (IP address of the player) and the **remote control code**.
+
+> **YAML is deprecated.** If you previously configured the integration in
+> `configuration.yaml`, it will be imported automatically on the next restart;
+> you can then remove the `freebox_player:` block.
+
+<details>
+<summary>Legacy YAML (auto-imported, then remove)</summary>
 
 ```yaml
 # Example configuration.yaml entry
@@ -42,7 +52,9 @@ freebox_player:
   host: 192.168.0.xx
 ```
 
-Where `remote_code` is the free authorization code for remote and `host` the ip of the player device.
+</details>
+
+Where `remote_code` is the free authorization code for the remote and `host` the IP of the player device.
 
 ### How to get the remote control code
 

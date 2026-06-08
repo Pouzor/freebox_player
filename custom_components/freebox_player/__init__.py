@@ -10,15 +10,13 @@ import logging
 import aiohttp
 import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
+from homeassistant.config_entries import SOURCE_IMPORT, ConfigEntry
 from homeassistant.const import CONF_HOST
 from homeassistant.core import HomeAssistant, ServiceCall
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.typing import ConfigType
 
-DOMAIN = "freebox_player"
-CONF_REMOTE_CODE = "remote_code"
-REMOTE_PATH = "/pub/remote_control"
-SERVICE_REMOTE = "remote"
+from .const import CONF_REMOTE_CODE, DOMAIN, REMOTE_PATH, SERVICE_REMOTE
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -38,13 +36,25 @@ SERVICE_REMOTE_SCHEMA = vol.Schema({vol.Required("code"): cv.string})
 
 
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
-    """Set up the Freebox Player component from YAML configuration."""
-    conf = config.get(DOMAIN)
-    if conf is None:
-        return True
+    """Set up the integration from YAML by importing into a config entry.
 
-    host: str = conf[CONF_HOST]
-    remote_code: str = conf[CONF_REMOTE_CODE]
+    YAML configuration is deprecated; this only migrates an existing
+    `configuration.yaml` block into a UI config entry once.
+    """
+    conf = config.get(DOMAIN)
+    if conf is not None:
+        hass.async_create_task(
+            hass.config_entries.flow.async_init(
+                DOMAIN, context={"source": SOURCE_IMPORT}, data=conf
+            )
+        )
+    return True
+
+
+async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Set up Freebox Player from a config entry."""
+    host: str = entry.data[CONF_HOST]
+    remote_code: str = entry.data[CONF_REMOTE_CODE]
     base_url = f"http://{host}{REMOTE_PATH}"
     session = async_get_clientsession(hass)
 
@@ -66,4 +76,10 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     hass.services.async_register(
         DOMAIN, SERVICE_REMOTE, async_handle_remote, schema=SERVICE_REMOTE_SCHEMA
     )
+    return True
+
+
+async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Unload a config entry and remove the registered service."""
+    hass.services.async_remove(DOMAIN, SERVICE_REMOTE)
     return True
