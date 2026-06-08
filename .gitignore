@@ -1,0 +1,37 @@
+# Environment files - NEVER commit
+.env
+.env.*
+!.env.example
+
+# Secrets
+*.pem
+*.key
+*.p12
+credentials.json
+secrets.json
+service-account*.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+*.egg-info/
+
+# Build outputs
+dist/
+build/
+
+# IDE
+.idea/
+.vscode/settings.json
+.DS_Store
+
+# Claude - not shipped with the integration
+CLAUDE.md
+.claude/
+_project_specs/

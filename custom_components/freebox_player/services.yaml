@@ -1,6 +1,11 @@
 remote:
-  description: Call remote code to the Freebox Player
+  name: Send remote code
+  description: Send one or more key codes to the Freebox Player (comma-separated for a sequence).
   fields:
     code:
-      description: Code Number
-      example: 'power'
+      name: Code
+      description: Remote key code, or several separated by commas (e.g. "1,2,3").
+      required: true
+      example: "power"
+      selector:
+        text:

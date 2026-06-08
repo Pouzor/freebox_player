@@ -5,6 +5,6 @@
     "dependencies": [],
     "codeowners": ["@Pouzor"],
     "requirements": [],
-    "version": "1.0.6",
+    "version": "1.0.7",
     "iot_class": "local_push"
   }
