@@ -1,10 +1,13 @@
 {
-    "domain": "freebox_player",
-    "name": "Freebox Player",
-    "documentation": "https://github.com/Pouzor/freebox_player",
-    "dependencies": [],
-    "codeowners": ["@Pouzor"],
-    "requirements": [],
-    "version": "1.0.6",
-    "iot_class": "local_push"
-  }
+  "domain": "freebox_player",
+  "name": "Freebox Player",
+  "codeowners": ["@Pouzor"],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/Pouzor/freebox_player",
+  "iot_class": "local_push",
+  "issue_tracker": "https://github.com/Pouzor/freebox_player/issues",
+  "requirements": [],
+  "single_config_entry": true,
+  "version": "1.1.0"
+}

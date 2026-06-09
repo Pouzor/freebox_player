@@ -1,0 +1,17 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Freebox Player",
+        "description": "Saisissez l'hôte (adresse IP) de votre Freebox Player et le code de la télécommande.",
+        "data": {
+          "host": "Hôte",
+          "remote_code": "Code de la télécommande"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "La Freebox Player est déjà configurée."
+    }
+  }
+}

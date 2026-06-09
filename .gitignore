@@ -1,0 +1,43 @@
+# Environment files - NEVER commit
+.env
+.env.*
+!.env.example
+
+# Secrets
+*.pem
+*.key
+*.p12
+credentials.json
+secrets.json
+service-account*.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+*.egg-info/
+
+# Build outputs
+dist/
+build/
+
+# IDE
+.idea/
+.vscode/settings.json
+.DS_Store
+
+# Local HA dev environment (scripts/dev-ha.sh)
+dev-config/
+
+# Freebox app token from scripts/freebox-check.py - secret, NEVER commit
+.freebox-token.json
+
+# Claude - not shipped with the integration
+CLAUDE.md
+.claude/
+_project_specs/

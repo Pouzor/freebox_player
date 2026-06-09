@@ -1,0 +1,52 @@
+name: Quality
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install Ruff
+        run: pip install ruff
+      - name: Ruff check
+        run: ruff check custom_components
+      - name: Ruff format check
+        run: ruff format --check custom_components
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install test dependencies
+        run: pip install -r requirements_test.txt
+      - name: Run pytest
+        run: pytest
+
+  hassfest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Hassfest validation
+        uses: home-assistant/actions/hassfest@master
+
+  hacs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: HACS validation
+        uses: hacs/action@main
+        with:
+          category: integration
+          # 'brands' requires the domain to be in home-assistant/brands (separate repo).
+          ignore: brands

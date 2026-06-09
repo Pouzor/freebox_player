@@ -1,0 +1,17 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Freebox Player",
+        "description": "Enter your Freebox Player host (IP address) and the remote control code.",
+        "data": {
+          "host": "Host",
+          "remote_code": "Remote control code"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "Freebox Player is already configured."
+    }
+  }
+}

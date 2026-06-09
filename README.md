@@ -1,135 +1,146 @@
-# Freebox Player Custom Component for Home Assistant
+# Freebox Player — Custom Component for Home Assistant
 
 [![](https://img.shields.io/github/release/Pouzor/freebox_player/all.svg?style=for-the-badge)](https://github.com/Pouzor/freebox_player)
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg?style=for-the-badge)](https://github.com/hacs/integration)
 [![](https://img.shields.io/github/license/Pouzor/freebox_player?style=for-the-badge)](LICENSE)
 
-Based on pure-python library, this custom component enables remote control on your Freebox Player devices.
+Control your **Freebox Player** from Home Assistant. This component emulates the
+infrared remote over the network, using the player's `remote_control` HTTP API.
 
-This component is tested on Freebox Delta, but should work too on Freebox Revolution and Crystal (feedsback will be appreciated).
+## Compatibility
 
-It's doesn't works on Freebox mini 4K. This one doesn't have a remote code.
+This component targets the **classic Freebox Players** that expose the legacy
+remote-control API. The newer Android-TV players (Pop, Mini 4K) do **not** expose
+that API — use Home Assistant's built-in **[Android TV Remote][androidtv]**
+integration for those instead (see [below](#freebox-pop--mini-4k)).
 
+| Player | Supported here | How to control |
+|--------|:--------------:|----------------|
+| Freebox Révolution | ✅ | This component (remote code) |
+| Freebox Delta (player) | ✅ | This component (remote code) |
+| Freebox One / Crystal | ✅ | This component (remote code) |
+| Freebox **Pop** | ❌ | [Android TV Remote][androidtv] (core integration) |
+| Freebox **Mini 4K** | ❌ | [Android TV Remote][androidtv] (core integration) |
+
+> The remote code lives on the **Player** (the TV box), not on the server. In a
+> Delta-server + Pop-player setup, the player is a Pop → use Android TV Remote.
 
 ## Installation
 
-### HACS Install
+### HACS
 
-1. Search for `Freebox Player` under `Integrations` in the HACS Store tab.
-2. **You will need to restart after installation for the component to start working.**
-3. Configure the integation (see Configuration section)
-
-
-## Features
-* Supports On / Off 
-* Supports changing channels
-* Supports volume changes
-* Supports navigation controls
-* Even more incoming
-
-## Still under developpment
-This conponent use the old remote API, but since short time, Free is developping new API unrelated to remote (control player to open URL ect…)
+1. In HACS, go to **Integrations** and search for **Freebox Player**.
+2. Install, then **restart Home Assistant**.
+3. Configure it (see below).
 
 ## Configuration
-Once installed, the Freebox Player component needs to be configured in order to work.
 
-Edit `configuration.yaml` file and add the following:
+Configuration is done through the UI.
+
+1. **Settings → Devices & Services → Add Integration**.
+2. Search for **Freebox Player**.
+3. Enter the **Host** (IP address of the player) and the **remote control code**.
+
+> YAML is deprecated. An existing `freebox_player:` block in `configuration.yaml`
+> is imported automatically on the next restart; you can then remove it.
+
+### How to find the remote control code
+
+On the Player: **Main menu → Réglages → Système → Informations** → line
+**« Code télécommande réseau »** (8 digits).
+
+## Usage
+
+Call the `freebox_player.remote` service with a `code`:
 
 ```yaml
-# Example configuration.yaml entry
-freebox_player:
-  remote_code: 00000000
-  host: 192.168.0.xx
+service: freebox_player.remote
+data:
+  code: "power"
 ```
 
-Where `remote_code` is the free authorization code for remote and `host` the ip of the player device.
+### Sending several codes
 
-### How to get the remote control code
+Separate codes with a comma to send a sequence (e.g. channel `123`):
 
-Go to 
-* `Freebox main menu` >> `Parameters` >> `General Information` For old box
-* `Freebox main menu` >> `Réglages` >> `Systeme Information` For Delta 
-
-## How to use the remote
-
-To send remote code to the player, just call the service `freebox_player.remote` with the code in parameter: 
 ```yaml
-code: "power"
+service: freebox_player.remote
+data:
+  code: "1,2,3"
 ```
 
-### Mutiple code
+## Freebox Pop / Mini 4K
 
-If you want to send multiple code like `123` for example, you need to split each code with a comma :
+These run **Android TV** and ignore the legacy remote API. Control them with the
+official **[Android TV Remote][androidtv]** integration — it gives directional
+keys, power, volume, media and app launching (more than this component does):
+
+1. **Settings → Devices & Services → Add Integration → Android TV Remote**.
+2. Enter the player's **IP address**.
+3. Type the **pairing code shown on the TV**.
+
 ```yaml
-code: "1,2,3"
+service: remote.send_command
+target:
+  entity_id: remote.freebox_player_pop
+data:
+  command: "DPAD_UP"   # DPAD_CENTER, BACK, HOME, POWER, ...
 ```
 
-Or you call multiple times the service for each number (`1` && `2` && `3`)
+[androidtv]: https://www.home-assistant.io/integrations/androidtv_remote/
 
+## Button list
 
-## Button List
+* "red" — Bouton rouge
+* "green" — Bouton vert
+* "blue" — Bouton bleu
+* "yellow" — Bouton jaune
+* "power" — Power
+* "list" — Liste des chaînes
+* "tv" — TV
+* "1" … "9", "0" — Pavé numérique
+* "back" — Retour
+* "swap" — Swap
+* "info" — Info
+* "epg" — EPG (fct+)
+* "mail" — Mail
+* "media" — Media (fct+)
+* "help" — Help
+* "options" — Options (fct+)
+* "pip" — PiP
+* "vol_inc" / "vol_dec" — Volume +/-
+* "ok" — OK
+* "up" / "down" / "left" / "right" — Navigation
+* "prgm_inc" / "prgm_dec" — Programme +/-
+* "mute" — Sourdine
+* "home" — Free
+* "rec" — Enregistrement
+* "bwd" — Retour arrière (<<)
+* "prev" — Précédent (|<<)
+* "play" — Lecture / Pause
+* "fwd" — Avance rapide (>>)
+* "next" — Suivant (>>|)
+* "replay", "vod", "whatson", "records", "youtube", "radios", "canalvod", "netflix"
 
-* "red" // Bouton rouge
-* "green" // Bouton vert
-* "blue" // Bouton bleu
-* "yellow" // Bouton jaune
+## Development
 
-* "power" // Bouton Power
-* "list" // Affichage de la liste des chaines
-* "tv" // Bouton tv
+Local Home Assistant in Docker with this integration mounted:
 
-* "1" // Bouton 1
-* "2" // Bouton 2
-* "3" // Bouton 3
-* "4" // Bouton 4
-* "5" // Bouton 5
-* "6" // Bouton 6
-* "7" // Bouton 7
-* "8" // Bouton 8
-* "9" // Bouton 9
+```bash
+./scripts/dev-ha.sh          # start HA at http://localhost:8123, follow logs
+./scripts/dev-ha.sh restart  # pick up code edits
+./scripts/dev-ha.sh stop
+```
 
-* "back" // Bouton jaune (retour)
-* "0" // Bouton 0
-* "swap" // Bouton swap
+Run the tests:
 
-* "info" // Bouton info
-* "epg" // Bouton epg (fct+)
-* "mail" // Bouton mail
-* "media" // Bouton media (fct+)
-* "help" // Bouton help
-* "options" // Bouton options (fct+)
-* "pip" // Bouton pip
+```bash
+pip install -r requirements_test.txt
+pytest
+```
 
-* "vol_inc" // Bouton volume +
-* "vol_dec" // Bouton volume -
+Diagnose whether a player exposes the Freebox Player API (useful for Pop owners):
 
-* "ok" // Bouton ok
-* "up" // Bouton haut
-* "right" // Bouton droite
-* "down" // Bouton bas
-* "left" // Bouton gauche
-
-* "prgm_inc" //Bouton programme +
-* "prgm_dec" // Bouton programme -
-
-* "mute" // Bouton sourdine
-* "home" // Bouton Free
-* "rec" // Bouton Rec
-
-* "bwd" // Bouton << retour arrière
-* "prev" // Bouton |<< précédent
-* "play" // Bouton Lecture / Pause
-* "fwd" // Bouton >> avance rapide
-* "next" // Bouton >>| suivant
-
-* "tv"
-* "replay"
-* "vod"
-* "whatson"
-* "records"
-* "media"
-* "youtube"
-* "radios"
-* "canalvod"
-* "pip"
-* "netflix"
+```bash
+python3 scripts/freebox-check.py
+```
