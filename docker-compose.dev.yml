@@ -1,0 +1,12 @@
+services:
+  homeassistant:
+    image: ghcr.io/home-assistant/home-assistant:stable
+    container_name: freebox_player_dev_ha
+    volumes:
+      # HA configuration + state (gitignored, seeded by scripts/dev-ha.sh)
+      - ./dev-config:/config
+      # Live-mount the integration so edits are picked up on restart
+      - ./custom_components:/config/custom_components:ro
+    ports:
+      - "8123:8123"
+    restart: unless-stopped

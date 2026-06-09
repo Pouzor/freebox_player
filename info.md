@@ -1,107 +1,29 @@
-# Freebox Player Custom Component for Home Assistant
+# Freebox Player — Custom Component for Home Assistant
 
-Based on pure-python library, this custom component enables remote control on your Freebox Player devices.
+Control your Freebox Player from Home Assistant, emulating the network remote
+via the player's `remote_control` HTTP API.
 
-This component is tested on Freebox Delta, but should work too on FreeBox Revolution, mini and crystal (feedsback will be appreciated)
+## Compatibility
 
-## Features
-* Supports On / Off 
-* Supports changing channels
-* Supports volume changes
-* Supports navigation controls
-* Even more incoming
+Works with the **classic players** (Révolution, Delta player, One, Crystal).
 
-## Still under developpment
-This conponent use the old remote API, but since short time, Free is developping new API unrelated to remote (control player to open URL ect…)
+The **Freebox Pop** and **Mini 4K** run Android TV and do **not** expose this
+API — use Home Assistant's built-in **Android TV Remote** integration for them.
 
 ## Configuration
-Once installed, the Freebox Player component needs to be configured in order to work.
 
-Edit `configuration.yaml` file and add the following:
+Set up from the UI: **Settings → Devices & Services → Add Integration →
+Freebox Player**, then enter the player's **host** (IP) and **remote control
+code** (Player: *Réglages → Système → Informations → « Code télécommande
+réseau »*).
+
+## Usage
 
 ```yaml
-# Example configuration.yaml entry
-freebox_player:
-  remote_code: 00000000
-  host: 192.168.0.xx
+service: freebox_player.remote
+data:
+  code: "power"      # or several: "1,2,3"
 ```
 
-Where `remote_code` is the free authorization code for remote and `host` the ip of the player device.
-
-### How to get the remote control code
-
-Go to 
-* `Freebox main menu` >> `Parameters` >> `General Information` For old box
-* `Freebox main menu` >> `Réglages` >> `Systeme Information` For Delta 
-
-## How to use the remote
-
-To send remote code to the player, just call the service `freebox_player.remote` with the code in parameter: 
-```yaml
-code: "power"
-```
-
-### Mutiple code
-
-If you want to send multiple code like `123` for example, you need to split each code with a comma :
-```yaml
-code: "1,2,3"
-```
-
-Or you call multiple times the service for each number (`1` && `2` && `3`)
-
-
-## Button List
-
-* "red" // Bouton rouge
-* "green" // Bouton vert
-* "blue" // Bouton bleu
-* "yellow" // Bouton jaune
-
-* "power" // Bouton Power
-* "list" // Affichage de la liste des chaines
-* "tv" // Bouton tv
-
-* "1" // Bouton 1
-* "2" // Bouton 2
-* "3" // Bouton 3
-* "4" // Bouton 4
-* "5" // Bouton 5
-* "6" // Bouton 6
-* "7" // Bouton 7
-* "8" // Bouton 8
-* "9" // Bouton 9
-
-* "back" // Bouton jaune (retour)
-* "0" // Bouton 0
-* "swap" // Bouton swap
-
-* "info" // Bouton info
-* "epg" // Bouton epg (fct+)
-* "mail" // Bouton mail
-* "media" // Bouton media (fct+)
-* "help" // Bouton help
-* "options" // Bouton options (fct+)
-* "pip" // Bouton pip
-
-* "vol_inc" // Bouton volume +
-* "vol_dec" // Bouton volume -
-
-* "ok" // Bouton ok
-* "up" // Bouton haut
-* "right" // Bouton droite
-* "down" // Bouton bas
-* "left" // Bouton gauche
-
-* "prgm_inc" //Bouton programme +
-* "prgm_dec" // Bouton programme -
-
-* "mute" // Bouton sourdine
-* "home" // Bouton Free
-* "rec" // Bouton Rec
-
-* "bwd" // Bouton << retour arrière
-* "prev" // Bouton |<< précédent
-* "play" // Bouton Lecture / Pause
-* "fwd" // Bouton >> avance rapide
-* "next" // Bouton >>| suivant
+See the [README](https://github.com/Pouzor/freebox_player) for the full button
+list and details.

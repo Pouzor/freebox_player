@@ -31,6 +31,12 @@ build/
 .vscode/settings.json
 .DS_Store
 
+# Local HA dev environment (scripts/dev-ha.sh)
+dev-config/
+
+# Freebox app token from scripts/freebox-check.py - secret, NEVER commit
+.freebox-token.json
+
 # Claude - not shipped with the integration
 CLAUDE.md
 .claude/
