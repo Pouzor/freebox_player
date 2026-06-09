@@ -48,3 +48,5 @@ jobs:
         uses: hacs/action@main
         with:
           category: integration
+          # 'brands' requires the domain to be in home-assistant/brands (separate repo).
+          ignore: brands

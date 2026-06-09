@@ -26,7 +26,7 @@ async def test_user_flow_creates_entry(hass: HomeAssistant) -> None:
 
 
 async def test_user_flow_aborts_if_already_configured(hass: HomeAssistant) -> None:
-    """A second entry for the same host is aborted."""
+    """A second entry is aborted (single_config_entry integration)."""
     MockConfigEntry(domain=DOMAIN, data=USER_INPUT, unique_id=USER_INPUT[CONF_HOST]).add_to_hass(
         hass
     )
@@ -34,9 +34,8 @@ async def test_user_flow_aborts_if_already_configured(hass: HomeAssistant) -> No
     result = await hass.config_entries.flow.async_init(
         DOMAIN, context={"source": config_entries.SOURCE_USER}
     )
-    result = await hass.config_entries.flow.async_configure(result["flow_id"], USER_INPUT)
     assert result["type"] is FlowResultType.ABORT
-    assert result["reason"] == "already_configured"
+    assert result["reason"] == "single_instance_allowed"
 
 
 async def test_import_flow_creates_entry(hass: HomeAssistant) -> None:
@@ -58,4 +57,4 @@ async def test_import_flow_aborts_duplicate(hass: HomeAssistant) -> None:
         DOMAIN, context={"source": config_entries.SOURCE_IMPORT}, data=USER_INPUT
     )
     assert result["type"] is FlowResultType.ABORT
-    assert result["reason"] == "already_configured"
+    assert result["reason"] == "single_instance_allowed"
